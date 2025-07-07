@@ -1,0 +1,68 @@
+---
+title: Title
+permalink: "{{ page.fileSlug }}/"
+date: Last Modified
+show_date: true
+show_toc: false
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }} · 3008</title>
+    <link rel="stylesheet" href="/styles/theme.css">
+
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+</head>
+<body>
+    <header>
+        <a id="blog-title" href="/">3008</a>
+        <div id="blog-subtitle">
+            <span><a href="/">Home</a></span>
+            <span><a href="/about">About</a></span>
+        </div>
+        <div id="contact">
+            <a href="https://github.com/Scallion3008" target="_blank" rel="noopener noreferrer">
+                <img src="/media/icons/github-mark.svg" alt="GitHub logo">
+            </a>
+            <a href="https://www.linkedin.com/in/scallion3008" target="_blank" rel="noopener noreferrer">
+                <img src="/media/icons/InBug-Black.png" alt="LinkedIn logo">
+            </a>
+            <a href="mailto:scallion3008@gmail.com" target="_blank" rel="noopener noreferrer">
+                <img src="/media/icons/mail.svg" alt="Email icon">
+            </a>
+        </div>
+    </header>
+
+    <main>
+        <h1>{{ title }}</h1>
+        
+        {% if show_date %}
+        <p class="post-date">{{ page.date | postDate }}</p>
+        {% endif %}
+
+        {% if show_toc %}
+        <aside>
+            <details>
+                <summary>Contents</summary>
+                {{ content | toc | safe }}
+            </details>
+        </aside>
+        {% endif %}
+        
+        <article>{{ content | safe }}</article>
+    </main>
+
+    <footer>
+        <p>&copy; <span id="current-year"></span> Ada Ho. All content licensed under CC BY-SA 3.0 unless otherwise stated.</p>
+        <p><i>Don't die wondering.</i></p>
+    </footer>
+
+    <script src="/scripts/theme.js"></script>
+</body>
+</html>
