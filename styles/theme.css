@@ -273,6 +273,7 @@ details > summary {
     .panel-toggle > form {
         flex-direction: column;
     }
+
     .panel-toggle > form > span {
         margin-right: 0;
     }
