@@ -14,3 +14,21 @@ for (const anchor of document.getElementsByTagName("a")) {
 
 // Update current year in copyright notice
 document.getElementById("current-year").textContent = new Date().getFullYear();
+
+// Panel toggles
+for (const toggle of document.getElementsByClassName("panel-toggle")) {
+    const [form, panelDiv] = toggle.children;
+
+    const showHidePanels = (radioButton) => {
+        const selectedPanelIdx = parseInt(radioButton.value);
+        [...panelDiv.children].forEach((panel, i) => {
+            panel.style.display = (i === selectedPanelIdx) ? "initial" : "none";
+        });
+    };
+
+    const radioButtons = form.querySelectorAll("input[type='radio']");
+    for (const radioButton of radioButtons) {
+        radioButton.addEventListener("change", () => showHidePanels(radioButton));
+    }
+    showHidePanels(radioButtons[form.panel.value])
+}

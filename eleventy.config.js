@@ -1,6 +1,7 @@
 import markdownIt from "markdown-it";
 import markdownItAnchor from "markdown-it-anchor";
 import tocPlugin from "eleventy-plugin-toc";
+import { v4 as uuidv4 } from "uuid";
 
 
 const postDateFormatter = new Intl.DateTimeFormat("en-US", {
@@ -28,11 +29,7 @@ export default (eleventyConfig) => {
         const altTextFixed = altText.replace(/<.*>/, " ");
 
         const captionHtml = caption ? `<figcaption>${caption}</figcaption>` : "";
-        return `
-            <figure>
-                <img src="${src}" alt="${altTextFixed}">${captionHtml}
-            </figure>
-        `;
+        return `<figure><img src="${src}" alt="${altTextFixed}">${captionHtml}</figure>`;
     });
 
     eleventyConfig.addShortcode("footnote-ref", (id) => {
@@ -70,6 +67,20 @@ export default (eleventyConfig) => {
             </p>
         `;
     });
+
+    eleventyConfig.addPairedShortcode("panel-toggle", (content, toggleName, ...names) => {
+        const panelId = uuidv4();
+
+        return `<div class="panel-toggle">
+<form><span>${toggleName}</span><div>${names.map((name, i) => `
+<input type="radio" id="panel-toggle-${panelId}-${i}" name="panel" value="${i}" ${i == 0 ? "checked" : ""}>
+<label for="panel-toggle-${panelId}-${i}">${name}</label>
+`).join("")}</div>
+</form><div class="panel-toggle-panels">${content}</div></div>`;
+    });
+
+    eleventyConfig.addPairedShortcode("panel", 
+        (content) => `<div class="panel">${content}</div>`);
 
     eleventyConfig.addFilter("postDate", (dateObj) =>
         postDateFormatter.format(dateObj));

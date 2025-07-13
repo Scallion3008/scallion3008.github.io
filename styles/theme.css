@@ -224,6 +224,43 @@ details > summary {
     font-weight: 600;
 }
 
+.panel-toggle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 1.2rem 0;
+}
+
+.panel-toggle > form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    line-height: 1.5em;
+    max-width: 100%;
+}
+
+.panel-toggle > form > span {
+    margin-right: 0.8ch;
+}
+
+.panel-toggle > form > div {
+    text-align: center;
+}
+
+.panel-toggle > form > div > input {
+    margin-right: 0.2ch;
+}
+
+.panel-toggle > form > div > input + label:not(:last-of-type) {
+    margin-right: 0.3ch;
+}
+
+.panel > figure {
+    margin: 0;
+}
+
 @media screen and (max-width: 768px) {
     :root {
         font-size: 17px;
@@ -231,5 +268,12 @@ details > summary {
 
     body {
         margin: 0 24px;
+    }
+
+    .panel-toggle > form {
+        flex-direction: column;
+    }
+    .panel-toggle > form > span {
+        margin-right: 0;
     }
 }

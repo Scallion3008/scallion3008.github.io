@@ -121,6 +121,7 @@
     "uc.micro": "^2.1.0",
     "unpipe": "^1.0.0",
     "urlpattern-polyfill": "^10.1.0",
+    "uuid": "^11.1.0",
     "ws": "^8.18.3"
   },
   "scripts": {
