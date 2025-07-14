@@ -1,6 +1,7 @@
 ---
 layout: theme
 title: TIL-AI 2025
+description: I was part of a three-person technical team that helped to organize TIL-AI 2025—probably the biggest AI competition for pre-university and university students in Singapore.
 tags: ["post"]
 show_toc: true
 ---
