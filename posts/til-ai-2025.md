@@ -263,7 +263,7 @@ Interestingly, `torch.compile` actually made things worse by introducing random 
 
 {% footnote-content "lp-dist" "I found this accuracy surprisingly high because a similar solution was found to perform abysmally during red-teaming of a 2-dimensional variant of the task. Or maybe my implementation was buggy. Come to think of it, that's a lot more likely…" %}
 
-{% footnote-content "whitest-left-edge" "Alternatively, one team smartly used the existence of margins in our train-set documents to infer that the leftmost slice would be that with the whitest left edge. Identifying this slice with a straightforward argmax over mean pixel intensities of all slices' left edges, they proceeded to extend the sequence in the rightward direction only, as per regular beam search." %}
+{% footnote-content "whitest-left-edge" "Alternatively, one team smartly used the existence of margins in our train-set documents to infer that the leftmost slice would be that with the whitest left edge. Identifying this slice with a straightforward argmax over mean pixel intensities of all slices' left edges, they then proceeded to extend the sequence in the rightward direction only, as per regular beam search." %}
 
 {% footnote-content "pytorch-base-images" "Later it was discovered that the smaller base images `pytorch/pytorch:2.7.0-cuda12.8-cudnn9-devel` (8.77GB) and `pytorch/pytorch:2.7.0-cuda12.8-cudnn9-runtime` (3.99GB) also worked on both GCP and our competition desktop." %}
 
