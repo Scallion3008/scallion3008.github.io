@@ -31,7 +31,7 @@ If you're a participant, I'm sorry—yes, I had the biggest role in setting this
 
 To create the train and test sets, we scraped several hundred HDRI cubemaps from [Poly Haven](https://polyhaven.com) using Selenium WebDriver, then manually filtered out any that already contained instances of our target classes. {% footnote-ref "obj-det" %} We also downloaded more than 1300 transparent PNGs to use as targets, mostly from [pngwing.com](https://pngwing.com). About 20% of cubemaps and targets were held out for use in the test sets.
 
-The actual process of data generation was embarrassingly parallel:
+The actual process of data generation was [embarrassingly parallel](https://en.wikipedia.org/wiki/Embarrassingly_parallel):
 1. Cubemaps were rendered into backgrounds at randomly selected angles.
 2. Backgrounds were then segmented into land, sea and sky using [EOMT](https://github.com/tue-mps/EoMT) to ensure realistic target positioning.
 3. Targets were randomly selected, rotated and horizontally flipped, then pasted on an appropriate region of each background.
@@ -93,7 +93,7 @@ Surprisingly, NNs were often also inferior in accuracy, though I posit that this
 To my knowledge, all the best solutions were CV-based. (If you submitted an NLP-based solution that attained >0.5 accuracy, [drop me an email](mailto:scallion3008@gmail.com)!) Interestingly, all solutions I learned of involved only pairwise comparison between a slice and its candidate neighbors; as you'll soon see, this independence assumption is very much serviceable.
 
 #### Similarity metrics
-A neural net isn't the only way or even the best way of calculating $p(s_i, s_j)$. Safe to say, participants got pretty creative with it.
+A neural net isn't the only—nor necessarily the best—way of calculating $p(s_i, s_j)$. Safe to say, participants got pretty creative with it.
 
 **$L^p$ distance between edges.** Exactly what it sounds like: subtract the right edge of $s_i$ from the left edge of $s_j$, then calculate dissimilarity by taking some norm of the resulting vector. Simple, but surprisingly effective—using the $L^1$ norm, one team attained an accuracy of 0.838 and a speed score of 0.966. {% footnote-ref "lp-dist" %}
 
@@ -198,27 +198,27 @@ Credit for much of the excellent design concept goes to Tianshi, inspired by the
 
 {% panel-toggle "Toggle display:", "Map", "ASR", "CV", "OCR", "Surprise" %}
     {% panel %}
-        {% figure "/media/posts/til-ai-2025/map-3x.png" "RL map and leaderboard. Matchstick represents Scout; binoculars represent Guards." %}
+        {% figure "/media/posts/til-ai-2025/map.png" "RL map and leaderboard. Matchstick represents Scout; binoculars represent Guards." %}
     {% endpanel %}
     {% panel %}
-        {% figure "/media/posts/til-ai-2025/missions-asr-2-3x.png" "ASR task visualization. Correct words in green; substitutions in orange; deletions in red." %}
+        {% figure "/media/posts/til-ai-2025/missions-asr-2.png" "ASR task visualization. Correct words in green; substitutions in orange; deletions in red." %}
     {% endpanel %}
     {% panel %}
-        {% figure "/media/posts/til-ai-2025/missions-cv-3x.png" "CV task visualization. Ground-truth bounding boxes in green; predictions in yellow." %}
+        {% figure "/media/posts/til-ai-2025/missions-cv.png" "CV task visualization. Ground-truth bounding boxes in green; predictions in yellow." %}
     {% endpanel %}
     {% panel %}
-        {% figure "/media/posts/til-ai-2025/missions-ocr-bad-3x.png" "OCR task visualization. Correct words highlighted in green; substitutions in orange; deletions in red." %}
+        {% figure "/media/posts/til-ai-2025/missions-ocr-bad.png" "OCR task visualization. Correct words highlighted in green; substitutions in orange; deletions in red." %}
     {% endpanel %}
     {% panel %}
-        {% figure "/media/posts/til-ai-2025/missions-surprise-good-3x.png" "Surprise task visualization. Runs of correctly assembled slices were colored green, yellow or red depending on their length." %}
+        {% figure "/media/posts/til-ai-2025/missions-surprise-good.png" "Surprise task visualization. Runs of correctly assembled slices were colored green, yellow or red depending on their length." %}
     {% endpanel %}
 {% endpanel-toggle %}
 
 ## The aftermath
 
-{% figure "/media/posts/til-ai-2025/aftermath-1.png", "The tech team asleep in the organizers' corner, sometime between 6am and 7am on competition day.<br>From top to bottom: me, Tianshi, Ryan." %}
+{% figure "/media/posts/til-ai-2025/aftermath-1.jpg", "The tech team asleep in the organizers' corner, sometime between 6am and 7am on competition day.<br>From top to bottom: me, Tianshi, Ryan." %}
 
-{% figure "/media/posts/til-ai-2025/aftermath-2.jpg", "The tech team passed out on the Advanced Finals map post-event, alongside five tastefully decorated TurtleBot3 robots.<br>From left to right: Ryan, Tianshi, me." %}
+{% figure "/media/posts/til-ai-2025/aftermath-2-small.jpg", "The tech team passed out on the Advanced Finals map post-event, alongside five tastefully decorated TurtleBot3 robots.<br>From left to right: Ryan, Tianshi, me." %}
 
 ## Footnotes
 {% footnote-content "obj-det" "I maintain that this was preferable to employing a pretrained object detector, mostly because I didn't want participants to tear my head off upon finding a missing ground-truth bounding box. Plus the filtering took only half an hour." %}
