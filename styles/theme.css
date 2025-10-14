@@ -40,6 +40,14 @@ header {
     border-bottom: 1px solid var(--dark-green);
 }
 
+blockquote {
+    border-left: 4px solid #aaa;
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 1em;
+    color: #000000aa;
+}
+
 #blog-title {
     font-size: 2.75rem;
     color: var(--dark-green);
