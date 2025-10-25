@@ -32,12 +32,17 @@ export default (eleventyConfig) => {
         return `<figure><img src="${src}" alt="${altTextFixed}">${captionHtml}</figure>`;
     });
 
-    eleventyConfig.addShortcode("footnote-ref", (id) => {
-        let footnoteEntry = footnoteMap.get(id);
+    eleventyConfig.addShortcode("footnote-ref", function (id) {
+        let thisPageFootnotes = footnoteMap.get(this.page.url);
+        if (typeof thisPageFootnotes === "undefined") {
+            thisPageFootnotes = new Map();
+            footnoteMap.set(this.page.url, thisPageFootnotes);
+        }
 
+        let footnoteEntry = thisPageFootnotes.get(id);
         if (typeof footnoteEntry === "undefined") {
-            footnoteEntry = [1 + footnoteMap.size, 1]; // [footnoteIdx, numReferences]
-            footnoteMap.set(id, footnoteEntry);
+            footnoteEntry = [1 + thisPageFootnotes.size, 1]; // [footnoteIdx, numReferences]
+            thisPageFootnotes.set(id, footnoteEntry);
         } else {
             footnoteEntry[1]++;
         }
@@ -49,8 +54,13 @@ export default (eleventyConfig) => {
         >[${footnoteEntry[0]}]</a>`;
     });
 
-    eleventyConfig.addShortcode("footnote-content", (id, text) => {
-        const footnoteEntry = footnoteMap.get(id);
+    eleventyConfig.addShortcode("footnote-content", function (id, text) {
+        const thisPageFootnotes = footnoteMap.get(this.page.url);
+        if (typeof thisPageFootnotes === "undefined") {
+            return "";
+        }
+
+        const footnoteEntry = thisPageFootnotes.get(id);
         if (typeof footnoteEntry === "undefined") {
             return "";
         }
